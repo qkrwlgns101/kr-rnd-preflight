@@ -1,6 +1,6 @@
 {
   "name": "kr-rnd-preflight",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "국가 R&D 연구비 데이터의 기계적 불일치 후보를 로컬에서 찾는 오픈소스 보조도구",
   "license": "MIT",
