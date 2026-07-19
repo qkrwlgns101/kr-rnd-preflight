@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>연구비 프리플라이트</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">P</span>
+      <div>
+        <strong>연구비 프리플라이트</strong>
+        <small>데이터 불일치 사전점검</small>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="local-badge"><span class="dot"></span>내 PC에서만 처리</span>
+      <button id="shutdownButton" class="ghost-button" type="button">검증기 종료</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">OPEN SOURCE · LOCAL FIRST</p>
+      <h1>정산 전에, 데이터가 서로 맞는지 먼저 확인하세요.</h1>
+      <p class="hero-copy">협약기간, 예산표, 참여인력, 증빙목록과 집행내역을 기계적으로 대조합니다. 선택한 파일은 외부 서버로 전송되지 않습니다.</p>
+      <div class="notice"><strong>중요:</strong> 이 도구는 오류 후보를 찾는 보조도구입니다. 집행 적정성, 회계·법률 판단 또는 정산 통과를 보증하지 않습니다.</div>
+    </section>
+
+    <form id="validationForm" novalidate>
+      <section class="panel">
+        <div class="section-heading">
+          <span class="step">1</span>
+          <div>
+            <h2>과제 정보</h2>
+            <p>현재 승인된 협약기간을 입력하세요.</p>
+          </div>
+        </div>
+        <div class="form-grid">
+          <label class="wide">과제명
+            <input id="projectName" name="projectName" placeholder="예: 스마트센서 시제품 개발" required>
+          </label>
+          <label>협약 시작일
+            <input id="agreementStart" name="agreementStart" type="date" required>
+          </label>
+          <label>현재 협약 종료일
+            <input id="agreementEnd" name="agreementEnd" type="date" required>
+          </label>
+          <label class="wide">인건비 비목코드
+            <input id="personnelCodes" name="personnelCodes" value="LAB" placeholder="여러 개면 쉼표로 구분">
+            <small>해당 코드의 거래만 참여인력 목록과 대조합니다.</small>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-heading">
+          <span class="step">2</span>
+          <div>
+            <h2>CSV 파일 선택</h2>
+            <p>엑셀에서 CSV UTF-8 형식으로 저장한 파일을 사용할 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="file-grid">
+          <article class="file-card">
+            <div><span class="file-number">A</span><h3>예산표</h3></div>
+            <p>비목코드와 승인 예산액</p>
+            <input id="budgetFile" type="file" accept=".csv,text/csv" required>
+            <label for="budgetFile" class="file-button">파일 선택</label>
+            <span id="budgetName" class="file-name">선택 안 됨</span>
+            <a href="examples/budget.csv" download>예시 CSV 받기</a>
+          </article>
+          <article class="file-card">
+            <div><span class="file-number">B</span><h3>참여인력</h3></div>
+            <p>참여인력 ID 또는 성명</p>
+            <input id="participantsFile" type="file" accept=".csv,text/csv" required>
+            <label for="participantsFile" class="file-button">파일 선택</label>
+            <span id="participantsName" class="file-name">선택 안 됨</span>
+            <a href="examples/participants.csv" download>예시 CSV 받기</a>
+          </article>
+          <article class="file-card">
+            <div><span class="file-number">C</span><h3>증빙목록</h3></div>
+            <p>보유 중인 증빙 ID나 파일명</p>
+            <input id="evidenceFile" type="file" accept=".csv,text/csv" required>
+            <label for="evidenceFile" class="file-button">파일 선택</label>
+            <span id="evidenceName" class="file-name">선택 안 됨</span>
+            <a href="examples/evidence.csv" download>예시 CSV 받기</a>
+          </article>
+          <article class="file-card">
+            <div><span class="file-number">D</span><h3>집행내역</h3></div>
+            <p>검사할 전체 거래내역</p>
+            <input id="transactionsFile" type="file" accept=".csv,text/csv" required>
+            <label for="transactionsFile" class="file-button">파일 선택</label>
+            <span id="transactionsName" class="file-name">선택 안 됨</span>
+            <a href="examples/transactions.csv" download>예시 CSV 받기</a>
+          </article>
+        </div>
+        <details class="format-help">
+          <summary>지원하는 열 이름 보기</summary>
+          <div class="format-columns">
+            <p><strong>예산표 필수:</strong> 비목코드, 예산액</p>
+            <p><strong>참여인력 필수:</strong> 참여인력ID 또는 성명</p>
+            <p><strong>증빙목록 필수:</strong> 증빙ID, 증빙번호 또는 파일명</p>
+            <p><strong>집행내역 필수:</strong> 집행일자, 비목코드, 집행금액</p>
+            <p><strong>정밀검사 권장:</strong> 집행번호, 증빙번호, 증빙ID, 참여인력ID, 거래처ID, 거래처명, 상태</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="action-panel">
+        <div>
+          <strong>처음 사용하시나요?</strong>
+          <span>예시 데이터에는 의도적인 오류 8건이 들어 있습니다.</span>
+        </div>
+        <div class="action-buttons">
+          <button id="demoButton" class="secondary-button" type="button">예시 데이터 불러오기</button>
+          <button id="validateButton" class="primary-button" type="submit">불일치 검사 시작</button>
+        </div>
+      </section>
+      <p id="errorBox" class="error-box" role="alert" hidden></p>
+    </form>
+
+    <section id="results" class="results" hidden aria-live="polite">
+      <div class="results-title">
+        <div>
+          <p class="eyebrow">VALIDATION RESULT</p>
+          <h2>검사 결과</h2>
+        </div>
+        <div class="download-buttons">
+          <button id="downloadCsv" class="ghost-button" type="button">결과 CSV</button>
+          <button id="downloadJson" class="ghost-button" type="button">전체 JSON</button>
+        </div>
+      </div>
+      <div id="metrics" class="metrics"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>위험</th><th>거래 ID</th><th>CSV 행</th><th>검사 항목</th><th>확인할 값</th></tr></thead>
+          <tbody id="findingsBody"></tbody>
+        </table>
+      </div>
+      <p class="result-notice">결과가 0건이어도 집행 적정성이나 정산 통과를 의미하지 않습니다. 최종 판단은 주관기관·회계법인·관련 전문가에게 확인하세요.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>비공식 오픈소스 보조도구 · RCMS/GAIA 또는 정부기관과 제휴·승인 관계가 없습니다. · <a href="licenses" target="_blank" rel="noreferrer">제3자 라이선스</a></p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

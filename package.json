@@ -1,0 +1,20 @@
+{
+  "name": "kr-rnd-preflight",
+  "version": "0.1.0",
+  "private": true,
+  "description": "국가 R&D 연구비 데이터의 기계적 불일치 후보를 로컬에서 찾는 오픈소스 보조도구",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.cjs",
+    "test": "node --test test/validator.test.cjs",
+    "test:executable": "node test/executable-smoke.cjs",
+    "build:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows.ps1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1",
+    "postject": "1.0.0-alpha.6"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

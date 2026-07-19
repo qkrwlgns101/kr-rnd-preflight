@@ -1,0 +1,17 @@
+{
+  "main": "build/app.cjs",
+  "output": "dist/sea-prep.blob",
+  "disableExperimentalSEAWarning": true,
+  "useSnapshot": false,
+  "useCodeCache": false,
+  "assets": {
+    "web/index.html": "web/index.html",
+    "web/app.js": "web/app.js",
+    "web/styles.css": "web/styles.css",
+    "examples/budget.csv": "examples/budget.csv",
+    "examples/participants.csv": "examples/participants.csv",
+    "examples/evidence.csv": "examples/evidence.csv",
+    "examples/transactions.csv": "examples/transactions.csv",
+    "THIRD_PARTY_LICENSES.txt": "build/THIRD_PARTY_LICENSES.txt"
+  }
+}
