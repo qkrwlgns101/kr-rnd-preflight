@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/server.cjs",
-    "test": "node --test test/validator.test.cjs",
+    "test": "node --test test/validator.test.cjs test/responsive-ui.test.cjs",
     "test:executable": "node test/executable-smoke.cjs",
     "build:windows": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows.ps1"
   },
